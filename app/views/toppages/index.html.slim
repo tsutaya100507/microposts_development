@@ -1,4 +1,14 @@
-.center.jumbotron
-  .text-center
-    h1 Welcome to Microposts
-    = link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary'
+- if logged_in?
+  .row
+    aside.col-md-4
+      = form_for(@micropost) do |f|
+        .form-group
+          = f.text_area :content, class: 'form-control', rows: 5
+        = f.submit 'Post', class: 'btn btn-primary btn-block'
+    .col-xs-8
+      = render 'microposts/microposts', microposts: @microposts
+- else
+  .center.jumbotron
+    .text-center
+      h1 Welcome to the Microposts
+      = link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary'
